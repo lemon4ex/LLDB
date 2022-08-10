@@ -510,7 +510,7 @@ def generate_header_script(options, class_to_generate_header):
     
     for (int i = 0; i < classCount; i++) {
       Method m = methods[i];
-      NSString *methodName = NSStringFromSelector((char *)method_getName(m));
+      NSString *methodName = NSStringFromSelector(method_getName(m));
       if ([blackListMethodNames containsObject:methodName]) {
         continue;
       }
@@ -773,7 +773,7 @@ def generate_module_header_script(options, modulePath):
       
       for (int i = 0; i < classCount; i++) {
         Method m = methods[i];
-        NSString *methodName = NSStringFromSelector((char *)method_getName(m));
+        NSString *methodName = NSStringFromSelector(method_getName(m));
         if ([blackListMethodNames containsObject:methodName]) {
           continue;
         }
