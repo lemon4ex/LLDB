@@ -208,7 +208,6 @@ def dclass(debugger, command, exe_ctx, result, internal_dict):
 
 def generate_class_dump(target, options, clean_command=None):
     command_script = r'''
-  @import ObjectiveC;
   @import Foundation;
   unsigned int count = 0;
 
@@ -360,8 +359,7 @@ def generate_module_search_sections_string(module_name, target, useProtocol=Fals
     return returnString
 
 def generate_header_script(options, class_to_generate_header):
-    script = '@import ObjectiveC;\n'
-    script += 'NSString *className = @"' + str(class_to_generate_header) + '";\n'
+    script = 'NSString *className = @"' + str(class_to_generate_header) + '";\n'
     script += r'''
   //Dang it. LLDB JIT Doesn't like NSString stringWithFormat on device. Need to use stringByAppendingString instead
 
@@ -615,7 +613,7 @@ def generate_header_script(options, class_to_generate_header):
     return script
 
 def generate_module_header_script(options, modulePath):
-    script = r'''@import @ObjectiveC;
+    script = r'''
   //Dang it. LLDB JIT Doesn't like NSString stringWithFormat on device. Need to use stringByAppendingString instead
 
   // Runtime declarations in case we're running on a stripped executable
@@ -860,7 +858,7 @@ def generate_class_info(options):
         classInfo = "[" + options.info + " class]"
 
 
-    script = "@import ObjectiveC;\n@import Foundation;\nBOOL verboseOutput = {};\n".format("YES" if verboseOutput else "NO")
+    script = "@import Foundation;\nBOOL verboseOutput = {};\n".format("YES" if verboseOutput else "NO")
     script +=  r'''
 
     #define RO_META               (1<<0)
